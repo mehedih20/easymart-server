@@ -37,6 +37,11 @@ async function run() {
       const result = await productCollection.find({}).toArray();
       res.json(result);
     });
+    // Get all users
+    app.get("/users", async (req, res) => {
+      const result = await userCollection.find({}).toArray();
+      res.json(result);
+    });
 
     //------------ Creating --------------
 
@@ -44,6 +49,18 @@ async function run() {
     app.post("/products", async (req, res) => {
       const product = req.body;
       const result = await productCollection.insertOne(product);
+      res.json(result);
+    });
+
+    //Create an user
+    app.put("/users", async (req, res) => {
+      const newUser = req.body;
+      const filter = { email: newUser.email };
+      const options = { upsert: true };
+      const updateDoc = {
+        $set: newUser,
+      };
+      const result = await userCollection.updateOne(filter, updateDoc, options);
       res.json(result);
     });
 
