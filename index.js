@@ -50,16 +50,25 @@ async function run() {
       const result = await userCollection.find({}).toArray();
       res.json(result);
     });
-    // Get all users
+
+    // Get all orders
     app.get("/orders", async (req, res) => {
       const result = await orderCollection.find({}).toArray();
       res.json(result);
     });
 
+    // Get orders of a specific user
+    app.get("/orders/:email", async (req, res) => {
+      const userEmail = req.params.email;
+      const query = { email: userEmail };
+      const result = await orderCollection.find(query).toArray();
+      res.json(result);
+    });
+
     // Get single user
     app.get("/users/:email", async (req, res) => {
-      const uesrEmail = req.params.email;
-      const query = { email: uesrEmail };
+      const userEmail = req.params.email;
+      const query = { email: userEmail };
       const result = await userCollection.findOne(query);
       res.json(result);
     });
