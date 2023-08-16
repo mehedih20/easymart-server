@@ -21,7 +21,7 @@ const client = new MongoClient(uri, {
 });
 
 //--------------------------
-async function run() {
+const run = async () => {
   try {
     await client.connect();
 
@@ -234,13 +234,15 @@ async function run() {
   } finally {
     // await client.close();
   }
-}
-run().catch(console.dir);
+};
 
 app.get("/", (req, res) => {
   res.send("Easy mart server running");
 });
-
-app.listen(port, () => {
-  console.log("Server running at port ", port);
-});
+run()
+  .then(() => {
+    app.listen(port, () => {
+      console.log("Server running at port ", port);
+    });
+  })
+  .catch(console.dir);
