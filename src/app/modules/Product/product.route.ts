@@ -4,6 +4,7 @@ import {
   createProduct,
   deleteSingleProduct,
   getAllProducts,
+  getProductCategories,
   getSingleProduct,
   updateProduct,
 } from "./product.controller";
@@ -12,6 +13,7 @@ import { productValidationSchema } from "./product.validation";
 const router = Router();
 
 router.get("/products", getAllProducts);
+router.get("/products/categories", getProductCategories);
 router.get("/products/:id", getSingleProduct);
 router.post(
   "/create-product",

@@ -4,12 +4,13 @@ import {
   createProductInDb,
   deleteSingleProductFromDb,
   getAllProductsFromDb,
+  getProductCategoriesFromDb,
   getSingleProductFromDb,
   updateProductInDb,
 } from "./product.services";
 
 const getAllProducts = catchAsync(async (req, res) => {
-  const result = await getAllProductsFromDb();
+  const result = await getAllProductsFromDb(req.query);
 
   res.status(httpStatus.OK).json({
     success: true,
@@ -18,6 +19,15 @@ const getAllProducts = catchAsync(async (req, res) => {
   });
 });
 
+const getProductCategories = catchAsync(async (req, res) => {
+  const result = await getProductCategoriesFromDb();
+
+  res.status(httpStatus.OK).json({
+    success: true,
+    message: "Product categories successfully",
+    categories: result,
+  });
+});
 const getSingleProduct = catchAsync(async (req, res) => {
   const { id } = req.params;
   const result = await getSingleProductFromDb(id);
@@ -63,6 +73,7 @@ const deleteSingleProduct = catchAsync(async (req, res) => {
 
 export {
   getAllProducts,
+  getProductCategories,
   getSingleProduct,
   deleteSingleProduct,
   createProduct,
