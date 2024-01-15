@@ -4,7 +4,15 @@ import { Product } from "./product.model";
 //Fetching all products
 const getAllProductsFromDb = async (query: Record<string, unknown>) => {
   //Extracting query fields
-  const { sortBy, limit = 12, page = 1, deal, sortOrder, categories } = query;
+  const {
+    sortBy,
+    limit = 12,
+    page = 1,
+    deal,
+    sortOrder,
+    categories,
+    searchTerm,
+  } = query;
 
   const skip = (Number(page) - 1) * Number(limit);
 
@@ -22,11 +30,13 @@ const getAllProductsFromDb = async (query: Record<string, unknown>) => {
 
   // Formatting filter object
   const querObj: any = {};
-
   if (deal) querObj.deal = deal;
   if (categories) {
     const arr = (categories as string).split(",");
     querObj.category = { $in: arr };
+  }
+  if (searchTerm) {
+    querObj.name = { $regex: searchTerm, $options: "i" };
   }
 
   // Making query to database and paginating

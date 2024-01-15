@@ -12,12 +12,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateProduct = exports.createProduct = exports.deleteSingleProduct = exports.getSingleProduct = exports.getAllProducts = void 0;
+exports.updateProduct = exports.createProduct = exports.deleteSingleProduct = exports.getSingleProduct = exports.getProductCategories = exports.getAllProducts = void 0;
 const http_status_1 = __importDefault(require("http-status"));
 const catchAsync_1 = __importDefault(require("../../utils/catchAsync"));
 const product_services_1 = require("./product.services");
 const getAllProducts = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield (0, product_services_1.getAllProductsFromDb)();
+    const result = yield (0, product_services_1.getAllProductsFromDb)(req.query);
     res.status(http_status_1.default.OK).json({
         success: true,
         message: "Products retrieved successfully",
@@ -25,6 +25,15 @@ const getAllProducts = (0, catchAsync_1.default)((req, res) => __awaiter(void 0,
     });
 }));
 exports.getAllProducts = getAllProducts;
+const getProductCategories = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield (0, product_services_1.getProductCategoriesFromDb)();
+    res.status(http_status_1.default.OK).json({
+        success: true,
+        message: "Product categories successfully",
+        categories: result,
+    });
+}));
+exports.getProductCategories = getProductCategories;
 const getSingleProduct = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     const result = yield (0, product_services_1.getSingleProductFromDb)(id);
