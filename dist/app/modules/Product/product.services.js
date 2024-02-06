@@ -14,7 +14,7 @@ const product_model_1 = require("./product.model");
 //Fetching all products
 const getAllProductsFromDb = (query) => __awaiter(void 0, void 0, void 0, function* () {
     //Extracting query fields
-    const { sortBy, limit = 12, page = 1, deal, sortOrder, categories } = query;
+    const { sortBy, limit = 12, page = 1, deal, sortOrder, categories, searchTerm, } = query;
     const skip = (Number(page) - 1) * Number(limit);
     // Formatting sort object
     const sortObj = {};
@@ -35,6 +35,9 @@ const getAllProductsFromDb = (query) => __awaiter(void 0, void 0, void 0, functi
     if (categories) {
         const arr = categories.split(",");
         querObj.category = { $in: arr };
+    }
+    if (searchTerm) {
+        querObj.name = { $regex: searchTerm, $options: "i" };
     }
     // Making query to database and paginating
     const searchQuery = yield product_model_1.Product.find(querObj)

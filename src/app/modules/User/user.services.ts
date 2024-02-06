@@ -18,7 +18,7 @@ const getAllUsersFromDb = async () => {
 };
 
 const getSingleUserFromDb = async (email: string) => {
-  const result = await User.find({
+  const result = await User.findOne({
     email,
   });
   return result;

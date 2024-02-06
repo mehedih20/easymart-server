@@ -26,7 +26,7 @@ const getAllUsersFromDb = () => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.getAllUsersFromDb = getAllUsersFromDb;
 const getSingleUserFromDb = (email) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield user_model_1.User.find({
+    const result = yield user_model_1.User.findOne({
         email,
     });
     return result;
