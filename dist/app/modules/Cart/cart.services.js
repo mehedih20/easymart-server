@@ -38,7 +38,7 @@ const removeCartItemFromDb = (userEmail, id) => __awaiter(void 0, void 0, void 0
     const result = yield cart_model_1.Cart.findOneAndUpdate({ userEmail }, {
         $pull: {
             cartItems: {
-                productId: id,
+                _id: id,
             },
         },
     }, {

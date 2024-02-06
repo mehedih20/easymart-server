@@ -41,7 +41,7 @@ const removeCartItem = (0, catchAsync_1.default)((req, res) => __awaiter(void 0,
     const result = yield (0, cart_services_1.removeCartItemFromDb)(email, id);
     res.status(http_status_1.default.OK).json({
         success: true,
-        message: "Cart updated successfully",
+        message: "Cart item removed successfully",
         cart: result,
     });
 }));

@@ -35,7 +35,7 @@ const removeCartItem = catchAsync(async (req, res) => {
 
   res.status(httpStatus.OK).json({
     success: true,
-    message: "Cart updated successfully",
+    message: "Cart item removed successfully",
     cart: result,
   });
 });

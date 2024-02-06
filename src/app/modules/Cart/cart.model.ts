@@ -1,22 +1,17 @@
 import { Schema, model } from "mongoose";
 import { TCart, TCartItem } from "./cart.interface";
 
-const userCartItemSchema = new Schema<TCartItem>(
-  {
-    productId: {
-      type: Schema.Types.ObjectId,
-      ref: "Product",
-      required: true,
-    },
-    productQuantity: {
-      type: Number,
-      required: true,
-    },
+const userCartItemSchema = new Schema<TCartItem>({
+  productId: {
+    type: Schema.Types.ObjectId,
+    ref: "Product",
+    required: true,
   },
-  {
-    _id: false,
-  }
-);
+  productQuantity: {
+    type: Number,
+    required: true,
+  },
+});
 
 const userCartSchema = new Schema<TCart>({
   userEmail: {

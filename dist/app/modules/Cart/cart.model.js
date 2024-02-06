@@ -12,8 +12,6 @@ const userCartItemSchema = new mongoose_1.Schema({
         type: Number,
         required: true,
     },
-}, {
-    _id: false,
 });
 const userCartSchema = new mongoose_1.Schema({
     userEmail: {

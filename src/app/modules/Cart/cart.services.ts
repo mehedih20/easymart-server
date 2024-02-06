@@ -36,7 +36,7 @@ const removeCartItemFromDb = async (userEmail: string, id: string) => {
     {
       $pull: {
         cartItems: {
-          productId: id,
+          _id: id,
         },
       },
     },

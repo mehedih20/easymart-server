@@ -18,6 +18,10 @@ const orderSchema = new Schema<TOrder>({
     type: Number,
     required: true,
   },
+  orderAddress: {
+    type: String,
+    required: true,
+  },
   productId: {
     type: Schema.Types.ObjectId,
     ref: "Product",
