@@ -15,6 +15,13 @@ const catchAsync = (func) => {
                     data: null,
                 });
             }
+            if (err.message === "Unauthorized Access") {
+                res.status(http_status_1.default.FORBIDDEN).json({
+                    success: false,
+                    message: err.message,
+                    data: null,
+                });
+            }
             next(err);
         });
     };

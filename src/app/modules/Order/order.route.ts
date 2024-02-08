@@ -10,10 +10,14 @@ import { auth } from "../../middlewares/auth";
 
 const router = Router();
 
-router.get("/orders", auth(), getAllOrders);
-router.get("/orders/:email", auth(), getSingleUserOrders);
-router.post("/orders", auth(), createOrders);
-router.put("/orders/:id", auth(), updateOrderStatus);
-router.delete("/orders/:id", auth(), deleteOrder);
+router.get("/orders", auth("admin", "owner"), getAllOrders);
+
+router.get("/orders/:email", auth("user"), getSingleUserOrders);
+
+router.post("/orders", auth("user"), createOrders);
+
+router.put("/orders/:id", auth("admin", "owner"), updateOrderStatus);
+
+router.delete("/orders/:id", auth("user"), deleteOrder);
 
 export const OrderRouter = router;

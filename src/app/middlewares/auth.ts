@@ -27,7 +27,9 @@ export interface Identities {
   email: string[];
 }
 
-export const auth = () => {
+type TRole = "user" | "admin" | "owner";
+
+export const auth = (...requiredRoles: TRole[]) => {
   return catchAsync(async (req, res, next) => {
     const token = req.headers.authorization;
 
@@ -54,6 +56,10 @@ export const auth = () => {
     //verifying user from token data
     const user = await User.findOne({ email: decoded.email });
     if (!user) {
+      throw new Error("Unauthorized Access");
+    }
+
+    if (requiredRoles && !requiredRoles.includes(user.role)) {
       throw new Error("Unauthorized Access");
     }
 

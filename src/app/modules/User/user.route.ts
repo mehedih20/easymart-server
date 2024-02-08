@@ -13,10 +13,10 @@ const router = Router();
 
 router.post("/users", validateData(userValidationSchema), createUser);
 
-router.get("/users", getAllUsers);
+router.get("/users", auth("admin", "owner"), getAllUsers);
 
 router.get("/users/:email", getSingleUser);
 
-router.put("/user/change-role/:id", auth(), changeUserRole);
+router.put("/user/change-role/:id", auth("owner"), changeUserRole);
 
 export const UserRouter = router;

@@ -14,20 +14,29 @@ import { auth } from "../../middlewares/auth";
 const router = Router();
 
 router.get("/products", getAllProducts);
+
 router.get("/products/categories", getProductCategories);
+
 router.get("/products/:id", getSingleProduct);
+
 router.post(
   "/create-product",
-  auth(),
+  auth("admin", "owner"),
   validateData(productValidationSchema),
   createProduct
 );
+
 router.put(
   "/products/:id",
-  auth(),
+  auth("admin", "owner"),
   validateData(productValidationSchema),
   updateProduct
 );
-router.delete("/delete-product/:id", auth(), deleteSingleProduct);
+
+router.delete(
+  "/delete-product/:id",
+  auth("admin", "owner"),
+  deleteSingleProduct
+);
 
 export const ProductRouter = router;
