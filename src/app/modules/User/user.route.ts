@@ -7,6 +7,7 @@ import {
 } from "./user.controller";
 import validateData from "../../middlewares/validateData";
 import { userValidationSchema } from "./user.validation";
+import { auth } from "../../middlewares/auth";
 
 const router = Router();
 
@@ -16,6 +17,6 @@ router.get("/users", getAllUsers);
 
 router.get("/users/:email", getSingleUser);
 
-router.put("/user/change-role/:id", changeUserRole);
+router.put("/user/change-role/:id", auth(), changeUserRole);
 
 export const UserRouter = router;

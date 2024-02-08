@@ -9,6 +9,7 @@ import {
   updateProduct,
 } from "./product.controller";
 import { productValidationSchema } from "./product.validation";
+import { auth } from "../../middlewares/auth";
 
 const router = Router();
 
@@ -17,14 +18,16 @@ router.get("/products/categories", getProductCategories);
 router.get("/products/:id", getSingleProduct);
 router.post(
   "/create-product",
+  auth(),
   validateData(productValidationSchema),
   createProduct
 );
 router.put(
   "/products/:id",
+  auth(),
   validateData(productValidationSchema),
   updateProduct
 );
-router.delete("/delete-product/:id", deleteSingleProduct);
+router.delete("/delete-product/:id", auth(), deleteSingleProduct);
 
 export const ProductRouter = router;
