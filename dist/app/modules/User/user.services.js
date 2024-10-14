@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.changeUserRoleInDb = exports.createUserInDb = exports.getSingleUserFromDb = exports.getAllUsersFromDb = void 0;
+exports.UserServices = void 0;
 const user_model_1 = require("./user.model");
 const createUserInDb = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const user = yield user_model_1.User.checkUserExists(payload.email);
@@ -19,21 +19,28 @@ const createUserInDb = (payload) => __awaiter(void 0, void 0, void 0, function* 
     const result = yield user_model_1.User.create(payload);
     return result;
 });
-exports.createUserInDb = createUserInDb;
 const getAllUsersFromDb = () => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield user_model_1.User.find();
     return result;
 });
-exports.getAllUsersFromDb = getAllUsersFromDb;
 const getSingleUserFromDb = (email) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield user_model_1.User.findOne({
         email,
     });
     return result;
 });
-exports.getSingleUserFromDb = getSingleUserFromDb;
+const updateUserInDb = (id, payload) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield user_model_1.User.findByIdAndUpdate(id, payload, { new: true });
+    return result;
+});
 const changeUserRoleInDb = (id, payload) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield user_model_1.User.findByIdAndUpdate(id, payload, { new: true });
     return result;
 });
-exports.changeUserRoleInDb = changeUserRoleInDb;
+exports.UserServices = {
+    getAllUsersFromDb,
+    getSingleUserFromDb,
+    createUserInDb,
+    updateUserInDb,
+    changeUserRoleInDb,
+};

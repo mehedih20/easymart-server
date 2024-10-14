@@ -24,14 +24,20 @@ const getSingleUserFromDb = async (email: string) => {
   return result;
 };
 
+const updateUserInDb = async (id: string, payload: Partial<TUser>) => {
+  const result = await User.findByIdAndUpdate(id, payload, { new: true });
+  return result;
+};
+
 const changeUserRoleInDb = async (id: string, payload: { role: string }) => {
   const result = await User.findByIdAndUpdate(id, payload, { new: true });
   return result;
 };
 
-export {
+export const UserServices = {
   getAllUsersFromDb,
   getSingleUserFromDb,
   createUserInDb,
+  updateUserInDb,
   changeUserRoleInDb,
 };

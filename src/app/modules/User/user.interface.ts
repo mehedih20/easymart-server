@@ -4,6 +4,9 @@ export type TUser = {
   email: string;
   name: string;
   role: "admin" | "user";
+  address?: string;
+  phoneNumber?: string;
+  profilePicture?: string;
 };
 
 export interface UserModel extends Model<TUser> {

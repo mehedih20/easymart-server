@@ -6,4 +6,11 @@ const userValidationSchema = z.object({
   role: z.enum(["user", "admin"]),
 });
 
-export { userValidationSchema };
+const userUpdateValidationSchema = z.object({
+  name: z.string().optional(),
+  address: z.string().optional(),
+  phoneNumber: z.string().optional(),
+  profilePicture: z.string().optional(),
+});
+
+export { userValidationSchema, userUpdateValidationSchema };

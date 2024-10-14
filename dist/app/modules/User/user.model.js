@@ -26,6 +26,18 @@ const userSchema = new mongoose_1.Schema({
         enum: ["user", "admin"],
         required: true,
     },
+    address: {
+        type: String,
+        default: "",
+    },
+    phoneNumber: {
+        type: String,
+        default: "",
+    },
+    profilePicture: {
+        type: String,
+        default: "",
+    },
 });
 // Custom static method for checking existing user
 userSchema.statics.checkUserExists = function (email) {

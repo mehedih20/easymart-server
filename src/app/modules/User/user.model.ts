@@ -16,6 +16,18 @@ const userSchema = new Schema<TUser, UserModel>({
     enum: ["user", "admin"],
     required: true,
   },
+  address: {
+    type: String,
+    default: "",
+  },
+  phoneNumber: {
+    type: String,
+    default: "",
+  },
+  profilePicture: {
+    type: String,
+    default: "",
+  },
 });
 
 // Custom static method for checking existing user
