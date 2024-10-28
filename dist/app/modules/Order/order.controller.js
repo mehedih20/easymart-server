@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteOrder = exports.updateOrderStatus = exports.createOrders = exports.getSingleUserOrders = exports.getAllOrders = void 0;
+exports.deleteOrder = exports.updateOrderStatus = exports.createOrders = exports.getLastestThreeOrders = exports.getSingleUserOrders = exports.getAllOrders = void 0;
 const http_status_1 = __importDefault(require("http-status"));
 const catchAsync_1 = __importDefault(require("../../utils/catchAsync"));
 const order_services_1 = require("./order.services");
@@ -35,6 +35,16 @@ const getSingleUserOrders = (0, catchAsync_1.default)((req, res) => __awaiter(vo
     });
 }));
 exports.getSingleUserOrders = getSingleUserOrders;
+const getLastestThreeOrders = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { email } = req.params;
+    const result = yield (0, order_services_1.getLastestThreeOrdersFromDb)(email);
+    res.status(http_status_1.default.OK).json({
+        success: true,
+        message: "Orders retrieved successfully",
+        orders: result,
+    });
+}));
+exports.getLastestThreeOrders = getLastestThreeOrders;
 const createOrders = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield (0, order_services_1.createOrdersInDb)(req.body);
     res.status(http_status_1.default.OK).json({

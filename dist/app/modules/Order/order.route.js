@@ -7,6 +7,7 @@ const auth_1 = require("../../middlewares/auth");
 const router = (0, express_1.Router)();
 router.get("/orders", (0, auth_1.auth)("admin", "owner"), order_controller_1.getAllOrders);
 router.get("/orders/:email", (0, auth_1.auth)("user"), order_controller_1.getSingleUserOrders);
+router.get("/latest-orders/:email", (0, auth_1.auth)("user", "admin", "owner"), order_controller_1.getLastestThreeOrders);
 router.post("/orders", (0, auth_1.auth)("user"), order_controller_1.createOrders);
 router.put("/orders/:id", (0, auth_1.auth)("admin", "owner"), order_controller_1.updateOrderStatus);
 router.delete("/orders/:id", (0, auth_1.auth)("user"), order_controller_1.deleteOrder);

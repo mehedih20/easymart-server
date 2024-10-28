@@ -4,6 +4,7 @@ import {
   createProductInDb,
   deleteSingleProductFromDb,
   getAllProductsFromDb,
+  getLatestThreeProductsFromDb,
   getProductCategoriesFromDb,
   getSingleProductFromDb,
   updateProductInDb,
@@ -35,6 +36,16 @@ const getSingleProduct = catchAsync(async (req, res) => {
   res.status(httpStatus.OK).json({
     success: true,
     message: "Product retrieved successfully",
+    product: result,
+  });
+});
+
+const getLatestThreeProducts = catchAsync(async (req, res) => {
+  const result = await getLatestThreeProductsFromDb();
+
+  res.status(httpStatus.OK).json({
+    success: true,
+    message: "Latest products retrieved successfully",
     product: result,
   });
 });
@@ -75,6 +86,7 @@ export {
   getAllProducts,
   getProductCategories,
   getSingleProduct,
+  getLatestThreeProducts,
   deleteSingleProduct,
   createProduct,
   updateProduct,

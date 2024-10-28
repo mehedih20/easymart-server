@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateProductInDb = exports.createProductInDb = exports.deleteSingleProductFromDb = exports.getProductCategoriesFromDb = exports.getSingleProductFromDb = exports.getAllProductsFromDb = void 0;
+exports.updateProductInDb = exports.createProductInDb = exports.deleteSingleProductFromDb = exports.getProductCategoriesFromDb = exports.getLatestThreeProductsFromDb = exports.getSingleProductFromDb = exports.getAllProductsFromDb = void 0;
 const product_model_1 = require("./product.model");
 //Fetching all products
 const getAllProductsFromDb = (query) => __awaiter(void 0, void 0, void 0, function* () {
@@ -66,6 +66,12 @@ const getSingleProductFromDb = (id) => __awaiter(void 0, void 0, void 0, functio
     return result;
 });
 exports.getSingleProductFromDb = getSingleProductFromDb;
+//Fetching latest three producta
+const getLatestThreeProductsFromDb = () => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield product_model_1.Product.find({}).sort({ createdAt: -1 }).limit(3);
+    return result;
+});
+exports.getLatestThreeProductsFromDb = getLatestThreeProductsFromDb;
 //Creating a product
 const createProductInDb = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield product_model_1.Product.create(payload);

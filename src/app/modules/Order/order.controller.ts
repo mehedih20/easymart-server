@@ -4,6 +4,7 @@ import {
   createOrdersInDb,
   deleteOrderFromDb,
   getAllOrdersFromDb,
+  getLastestThreeOrdersFromDb,
   getSingleUserOrdersFromDb,
   updateOrderStatusInDb,
 } from "./order.services";
@@ -21,6 +22,17 @@ const getAllOrders = catchAsync(async (req, res) => {
 const getSingleUserOrders = catchAsync(async (req, res) => {
   const { email } = req.params;
   const result = await getSingleUserOrdersFromDb(email);
+
+  res.status(httpStatus.OK).json({
+    success: true,
+    message: "Orders retrieved successfully",
+    orders: result,
+  });
+});
+
+const getLastestThreeOrders = catchAsync(async (req, res) => {
+  const { email } = req.params;
+  const result = await getLastestThreeOrdersFromDb(email);
 
   res.status(httpStatus.OK).json({
     success: true,
@@ -64,6 +76,7 @@ const deleteOrder = catchAsync(async (req, res) => {
 export {
   getAllOrders,
   getSingleUserOrders,
+  getLastestThreeOrders,
   createOrders,
   updateOrderStatus,
   deleteOrder,

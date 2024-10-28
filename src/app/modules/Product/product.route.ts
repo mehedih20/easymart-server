@@ -4,6 +4,7 @@ import {
   createProduct,
   deleteSingleProduct,
   getAllProducts,
+  getLatestThreeProducts,
   getProductCategories,
   getSingleProduct,
   updateProduct,
@@ -18,6 +19,8 @@ router.get("/products", getAllProducts);
 router.get("/products/categories", getProductCategories);
 
 router.get("/products/:id", getSingleProduct);
+
+router.get("/latest-products", auth("admin", "owner"), getLatestThreeProducts);
 
 router.post(
   "/create-product",

@@ -68,6 +68,12 @@ const getSingleProductFromDb = async (id: string) => {
   return result;
 };
 
+//Fetching latest three producta
+const getLatestThreeProductsFromDb = async () => {
+  const result = await Product.find({}).sort({ createdAt: -1 }).limit(3);
+  return result;
+};
+
 //Creating a product
 const createProductInDb = async (payload: TProduct) => {
   const result = await Product.create(payload);
@@ -90,6 +96,7 @@ const deleteSingleProductFromDb = async (id: string) => {
 export {
   getAllProductsFromDb,
   getSingleProductFromDb,
+  getLatestThreeProductsFromDb,
   getProductCategoriesFromDb,
   deleteSingleProductFromDb,
   createProductInDb,

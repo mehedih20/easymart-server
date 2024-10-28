@@ -9,18 +9,29 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteOrderFromDb = exports.updateOrderStatusInDb = exports.createOrdersInDb = exports.getSingleUserOrdersFromDb = exports.getAllOrdersFromDb = void 0;
+exports.deleteOrderFromDb = exports.updateOrderStatusInDb = exports.createOrdersInDb = exports.getLastestThreeOrdersFromDb = exports.getSingleUserOrdersFromDb = exports.getAllOrdersFromDb = void 0;
 const order_model_1 = require("./order.model");
 const getAllOrdersFromDb = () => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield order_model_1.Order.find();
+    const result = yield order_model_1.Order.find().sort({ createdAt: 1 });
     return result;
 });
 exports.getAllOrdersFromDb = getAllOrdersFromDb;
 const getSingleUserOrdersFromDb = (email) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield order_model_1.Order.find({ email });
+    const result = yield order_model_1.Order.find({ email }).sort({ createdAt: 1 });
     return result;
 });
 exports.getSingleUserOrdersFromDb = getSingleUserOrdersFromDb;
+const getLastestThreeOrdersFromDb = (email) => __awaiter(void 0, void 0, void 0, function* () {
+    let result;
+    if (email === "all") {
+        result = yield order_model_1.Order.find().sort({ createdAt: -1 }).limit(3);
+    }
+    else {
+        result = yield order_model_1.Order.find({ email }).sort({ createdAt: -1 }).limit(3);
+    }
+    return result;
+});
+exports.getLastestThreeOrdersFromDb = getLastestThreeOrdersFromDb;
 const createOrdersInDb = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield order_model_1.Order.create(payload);
     return result;

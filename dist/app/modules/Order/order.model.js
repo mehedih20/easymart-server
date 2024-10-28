@@ -33,5 +33,7 @@ const orderSchema = new mongoose_1.Schema({
         enum: ["shipped", "pending"],
         required: true,
     },
+}, {
+    timestamps: true,
 });
 exports.Order = (0, mongoose_1.model)("Order", orderSchema);
