@@ -12,23 +12,13 @@ const router = Router();
 
 router.post(
   "/category",
-  //   auth("admin", "owner"),
+  auth("admin", "owner"),
   validateData(categoryValidationSchema),
   addCategory
 );
 
-router.get(
-  "/categories",
-  // auth("admin", "owner"),
-  getCategories
-);
+router.get("/categories", auth("admin", "owner"), getCategories);
 
-router.delete(
-  "/category/:categoryId",
-  // auth("admin", "owner"),
-  deleteCategory
-);
-
-// router.put("/cart/:email/:id", auth("user"), removeCartItem);
+router.delete("/category/:categoryId", auth("admin", "owner"), deleteCategory);
 
 export const CategoryRouter = router;
